@@ -3,7 +3,7 @@
     'name': "quality_control",
 
     'summary': """
-        Modulo control de calidad
+        Modulo control de calidad Version 1
         """,
 
     'description': """
