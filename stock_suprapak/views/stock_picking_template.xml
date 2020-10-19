@@ -90,12 +90,16 @@
                     <br/>
                     <br/>
                     <br/>
-                    <p> Net Weight: <span t-esc="weight['net']"/> Kg </p>
-                    <p> Gross Weight: <span t-esc="weight['gross']"/> Kg </p>
-                    <p> Boxes: <span t-esc="boxs['box']"/> </p>
+                    <!--<p> Net Weight: <span t-esc="weight['net']"/> Kg </p>-->
+                    <!--<p> Gross Weight: <span t-esc="weight['gross']"/> Kg </p>-->
+                    <!--<p> Boxes: <span t-esc="boxs['box']"/> </p>-->
+                    <p> Cantidad de cajas:<span t-field="o.total_boxes_d" /></p>
+                    <p> Peso bruto total:<span t-field="o.weight_raw_total_d" /></p>
+                    <p> Peso neto total:<span t-field="o.weight_net_total_d" /></p>
                 </div>
                 <div>
                     <p> Ship date: <span t-field="o.scheduled_date"/> </p>
+                    
                 </div>
             </xpath>
         </template>

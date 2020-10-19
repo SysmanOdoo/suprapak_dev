@@ -6,6 +6,12 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="priority">15</field>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='client_order_ref']" position="replace">
+                    <field name="client_order_ref"/>
+                </xpath>
+                <xpath expr="//field[@name='client_order_ref']"  position="attributes">
+                    <attribute name="string">Orden de compra</attribute>
+                </xpath>
                 <xpath expr="//sheet/notebook/page[@name='order_lines']/field[@name='order_line']/tree/field[@name='price_unit']" position="before">
                     <field name="material_id"/>
                     <field name="drawn_type_id"/>
@@ -13,6 +19,11 @@
                     <field name="specification_width"/>
                     <field name="specification_long"/>
                     <field name="caliber_id"/>
+                    <!--From here Cristian-->
+                    <field name="seal_type"/>
+                    <field name="type_print_kronos"/>
+                     <!--<field name="number_of_colors"/>-->
+                    <!--to here Cristian-->
                     <field name="tongue"/>
                     <field name="thermal_adhesive"/>
                 </xpath>

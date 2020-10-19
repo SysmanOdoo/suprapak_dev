@@ -68,7 +68,11 @@
                                     <group>
                                         <field name="zip"/>
                                         <field name="product_code"/>
-                                        <field name="team_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                                        <!--Cristian here-->
+                                        <field name="zone_of_partner"/>
+                                        <!--<field name="team_id" options="{'no_create': True, 'no_create_edit':True}"/>-->
+                                        <field name="currency_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                                         <!--Cristian here-->
                                         <field name="currency_id" options="{'no_create': True, 'no_create_edit':True}"/>
                                     </group>
                                     <group string="customer packaging">
@@ -99,7 +103,15 @@
                                     </group>
                                     <!--<group>-->
                                         <group>
-                                            <field name="quantity"/>
+                                            <field name="quantity" invisible="1"/>
+                                            <!--<div class="o_row o_td_label">
+                                                <label for="quantity_ordered" string="Quantity"/>
+                                            </div>
+                                            <div class="o_row">
+                                                <field name="quantity_ordered"/>
+                                                <label for="quantity_unit" string=" "/>
+                                                <field name="quantity_unit" style="color:#FF0000"/>
+                                            </div>-->
                                             <field name="uom_id" options="{'no_create': True, 'no_create_edit':True}"/>
                                             <field name="form_id" options="{'no_create': True, 'no_create_edit':True}"/>
                                             <field name="movie_type_real_id" options="{'no_create': True, 'no_create_edit':True}"/>
@@ -270,6 +282,7 @@
                                                 <field name="sign_designer"/>
                                                 <field name="vendor_date"/>
                                                 <field name="date_recieved_approved"/>
+                                                
                                                 <field name="observations"/>
                                             </tree>
                                         </field>
@@ -285,6 +298,8 @@
                                     <group>
                                         <field name="color_scale_id" options="{'no_create': True, 'no_create_edit':True}"/>
                                         <field name="complexity"/>
+                                        <!--From here Cristian-->
+                                        <field name="number_of_colors"/>
                                     </group>
                                     <group>
                                         <field name="print_color_ids" widget="one2many" context="{'default_sheet_id': id}">
@@ -341,6 +356,7 @@
                                         </group>
                                         <group>
                                                 <h1><br></br></h1>
+                                                <field name="separator" attrs="{'invisible':[('presentation','!=','ROLLO')]}"/>
                                                 <field name="unit_per_bag"/>
                                                 <field name="unit_per_box"/>
                                                 <field name="bag_to_box" attrs="{'invisible':[('presentation','!=','ROLLO')]}"/>
@@ -507,7 +523,7 @@
                                     <group string="Control Point 1">
                                         <field name="blade_width"/>
                                         <field name="area_per_unit"/>
-                                        <field name="total_area_cold_foil"/>
+                                        <field name="total_area_cold_foil_1"/>
                                         
                                         <div class="o_row o_td_label">
                                             <label for="weigth_roll" string="Weigth Roll (Kg)" />
@@ -525,11 +541,11 @@
                                         <field name="uds_kg"/>
                                     </group>
                                     <group string="Control Point 2">
-                                        <field name="total_rolls"/>
-                                        <field name="required_meters"/>
-                                        <field name="meters_scrap"/>
-                                        <field name="total_weigth"/>
-                                        <field name="total_weigth_scrap"/>
+                                        <field name="total_rolls_1"/>
+                                        <field name="required_meters_1"/>
+                                        <field name="meters_scrap_1"/>
+                                        <field name="total_weigth_1"/>
+                                        <field name="total_weigth_scrap_1"/>
                                     </group>
                                     <group string="Control Point 3">
                                         <field name="waste_total"/>

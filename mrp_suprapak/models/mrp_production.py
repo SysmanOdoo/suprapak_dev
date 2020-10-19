@@ -60,7 +60,8 @@ class MrpProduction(models.Model):
                 cif = []
                 maq = []
                 for workorder in record.workorder_ids:
-                    workorder.button_pending()
+                    #workorder.button_pending()
+                    #workorder.end_previous()
                     #time = sum([x.duration for x in workorder.time_ids])
                     time= workorder.duration
                     time_corte= time

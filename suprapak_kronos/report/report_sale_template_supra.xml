@@ -539,7 +539,7 @@
                          </div>
                          <div id="rec" style="border-left-style: none;">
                             <strong>
-                                <t t-set="meter_programming" t-value="o.programing_meters()"/>
+                                <t t-set="meter_programming" t-value="o.programing_meters"/>
                                     <p align="center" style="text-align:center; margin: 60px 0"
                                           t-esc="meter_programming"/>
                             </strong>

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+        <record id="product_categ_sequence" model="ir.sequence">
+            <field name="name">Secuencia categoria del producto</field>
+            <field name="implementation">no_gap</field>
+            <field name="prefix"></field>
+            <field name="padding">0</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+        </record>
+  <!--      <record id="product_categ_sequence_papeleria" model="ir.sequence">
+            <field name="name">Secuencia papeleria</field>
+            <field name="implementation">no_gap</field>
+            <field name="prefix">1.</field>
+            <field name="padding">0</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+        </record>
+        <record id="product_categ_sequence_papeleria_general" model="ir.sequence">
+            <field name="name">Secuencia papeleria / papeleria general</field>
+            <field name="implementation">no_gap</field>
+            <field name="prefix">1.1-</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+        </record>
+        <record id="product_categ_sequence_papeleria_impresa" model="ir.sequence">
+            <field name="name">Secuencia papeleria / papeleria impresa</field>
+            <field name="implementation">no_gap</field>
+            <field name="prefix">1.2-</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+        </record>
+                <record id="product_categ_sequence_papeleria_pendiente" model="ir.sequence">
+            <field name="name">Secuencia papeleria / papeleria pendiente</field>
+            <field name="implementation">no_gap</field>
+            <field name="prefix">1.3-</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+        </record> -->
+    </data>
+</odoo>

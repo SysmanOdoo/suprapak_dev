@@ -1,0 +1,178 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* helpdesk_suprapak
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-02 14:46+0000\n"
+"PO-Revision-Date: 2020-09-02 14:46+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_helpdesk_ticket__action_plan
+msgid "Action Plan"
+msgstr "Plan de Acción"
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_complaint_claim__code
+msgid "Code"
+msgstr "Codigo"
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_complaint_claim__name
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_helpdesk_ticket__complain_type_id
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_type_complaint__complain_type_id
+msgid "Complain or Claim"
+msgstr "Queja o Reclamo"
+
+#. module: helpdesk_suprapak
+#: model:ir.actions.act_window,name:helpdesk_suprapak.complaint_claim
+#: model:ir.ui.menu,name:helpdesk_suprapak.menu_service_complaint_claim
+msgid "Complaint Claim"
+msgstr "Quejas y Reclamos"
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_complaint_claim__create_uid
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_subtype_complaint__create_uid
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_type_complaint__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_complaint_claim__create_date
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_subtype_complaint__create_date
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_type_complaint__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_helpdesk_ticket__credit_note
+msgid "Credit Note"
+msgstr "Nota Crédito"
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_complaint_claim__display_name
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_subtype_complaint__display_name
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_type_complaint__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_helpdesk_ticket_type__team_id
+msgid "Helpdesk Team"
+msgstr ""
+
+#. module: helpdesk_suprapak
+#: model:ir.model,name:helpdesk_suprapak.model_helpdesk_ticket
+msgid "Helpdesk Ticket"
+msgstr "Tiquete del Servicio de Asistencia"
+
+#. module: helpdesk_suprapak
+#: model:ir.model,name:helpdesk_suprapak.model_helpdesk_ticket_type
+msgid "Helpdesk Ticket Type"
+msgstr "Tipo de Ticket del Servicio de Mesa de Ayuda"
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_complaint_claim__id
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_subtype_complaint__id
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_type_complaint__id
+msgid "ID"
+msgstr ""
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_complaint_claim____last_update
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_subtype_complaint____last_update
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_type_complaint____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_complaint_claim__write_uid
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_subtype_complaint__write_uid
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_type_complaint__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_complaint_claim__write_date
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_subtype_complaint__write_date
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_type_complaint__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_helpdesk_ticket__quantity_report
+msgid "Quantity Report"
+msgstr "Cantidad Reportada"
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_helpdesk_ticket__queja
+msgid "Queja"
+msgstr ""
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_helpdesk_ticket__reclamo
+msgid "Reclamo"
+msgstr ""
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_helpdesk_ticket__replacement_material
+msgid "Replacement Material"
+msgstr "Reposición de Material"
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_helpdesk_ticket__return_material
+msgid "Return Material"
+msgstr "Devolución Material"
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_helpdesk_ticket__subtype_id
+msgid "Subtype"
+msgstr "No conformidad reportada"
+
+#. module: helpdesk_suprapak
+#: model:ir.actions.act_window,name:helpdesk_suprapak.subtype_complaint
+#: model:ir.model,name:helpdesk_suprapak.model_subtype_complaint
+#: model:ir.ui.menu,name:helpdesk_suprapak.menu_subtype_complaint
+msgid "Subtype Complaint"
+msgstr "No conformidad reportada"
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_subtype_complaint__name
+msgid "Subtypes"
+msgstr "No conformidad reportada"
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_helpdesk_ticket__type_id
+msgid "Type"
+msgstr "Tipo de queja o reclamo"
+
+#. module: helpdesk_suprapak
+#: model:ir.actions.act_window,name:helpdesk_suprapak.type_complaint
+#: model:ir.model,name:helpdesk_suprapak.model_type_complaint
+#: model:ir.ui.menu,name:helpdesk_suprapak.menu_type_complaint
+msgid "Type Complaint"
+msgstr "Tipo de Queja"
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_subtype_complaint__type_id
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_type_complaint__name
+msgid "Types"
+msgstr "Tipos de queja o reclamo"
+
+#. module: helpdesk_suprapak
+#: model:ir.model.fields,field_description:helpdesk_suprapak.field_helpdesk_ticket__unit_product_id
+msgid "Unit of measure Product"
+msgstr "Unidad de medida del Producto"
+
+#. module: helpdesk_suprapak
+#: model:ir.model,name:helpdesk_suprapak.model_complaint_claim
+msgid "complaint claim"
+msgstr "Queja o Reclamo"

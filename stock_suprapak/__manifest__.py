@@ -24,6 +24,7 @@
         # 'security/ir.model.access.csv',
         'views/product_template_view.xml',
         'views/stock_picking_template.xml',
+        'views/stock_move_fields_suprapak.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

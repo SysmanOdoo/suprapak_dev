@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+        <!-- account.journal inherit form view -->
+        <record id="account_journal_autonomous_heritage_view_id" model="ir.ui.view">
+            <field name="name">account.journal.inherit.view.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="l10n_co_e_invoicing_comfiar.account_journal_resolution_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='resolution_text']" position="before">
+                    <field name="description_pa"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,10 +1,11 @@
-# -*- coding: utf-8 -*-
-
-from odoo import models, fields, api
+from odoo import models, fields, api,_
 from odoo.exceptions import ValidationError
 from odoo.exceptions import AccessDenied
 from datetime import datetime
 import math
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class DataSheetSheet(models.Model):
@@ -18,6 +19,8 @@ class DataSheetSheet(models.Model):
     repeat_id = fields.Many2one('repeat', 'Repeat')
     repetition = fields.Integer('Repetition', default=1.00)
     description = fields.Char('Description')
+    
+    
 
 
 class DataSheetLine(models.Model):
@@ -26,10 +29,10 @@ class DataSheetLine(models.Model):
 
     company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.company.id)
     product_id = fields.Many2one('product.product', 'Product', required=True)
-    product_qty = fields.Float('Quantity', digits='Product Unit of Measure', default=1.00)
+    product_qty = fields.Float('Quantity', digits=(12,12), default=1.00)
     uom_id = fields.Many2one('uom.uom', 'Unit of measure', digits='Product Price')
     standard_price = fields.Float('Unit Price', digits='Product Price')
-    total = fields.Float('Total', digits='Product Price', readonly=True, compute='_compute_total')
+    total = fields.Float('Total', readonly=True, compute='_compute_total',digits=(12,12))
     uom_categ_id = fields.Many2one('uom.category', 'Uom category')
     field_char = fields.Char('Field', default='None')
     field_product = fields.Char()
@@ -58,6 +61,7 @@ class DataSheetLine(models.Model):
     name_pantone = fields.Char('Pantone')
     participation_pantone = fields.Float('Pantone Participation')
     
+    
     @api.depends('product_id')
     def _compute_total(self):
         for record in self:
@@ -71,6 +75,7 @@ class DataSheetLine(models.Model):
                 record.uom_categ_id = None
                 record.standard_price = 0
                 record.total = 0
+    
 
     @api.onchange('product_qty')
     def _onchange_total(self):
@@ -177,7 +182,9 @@ class DataSheet(models.Model):
     comments = fields.Text('Comments')
     # Button
     quotation_count = fields.Integer(compute='_compute_sale_data', string="Number of Quotations")
-    quantity = fields.Char('Quantity')
+    quantity = fields.Char(compute='_compute_quantity')
+    #quantity ordered
+    quantity_ordered = fields.Integer('Quantity',compute='_compute_quantity_ordered')
     order_ids = fields.One2many('sale.order', 'sheet_id', string='Orders')
     photo = fields.Binary()
     tag_form_id = fields.Many2one('data.tag.form', 'Tag Form')
@@ -194,7 +201,7 @@ class DataSheet(models.Model):
     bom_ids = fields.One2many('mrp.bom', 'sheet_id', 'Record')
     routing_id = fields.Many2one('mrp.routing', 'Routings')
     routings_ids = fields.Many2many('mrp.routing', 'sheet_routing_rel', 'sheet_id', 'routing_id', 'Routing')
-    average_label_weight = fields.Float('Average Lable Weight', compute='_compute_average_label_weight')
+    average_label_weight = fields.Float('Average Lable Weight', compute='_compute_average_label_weight',digits=(6,8))
     roll_weight = fields.Float('Roll Weight', compute='_compute_roll_weight')
     presentation_id = fields.Many2one('presentation', 'Presentation')
     presentation = fields.Char()
@@ -303,6 +310,7 @@ class DataSheet(models.Model):
     zip = fields.Char('Customer Code', compute='_compute_zip')
     unit_per_box = fields.Float('Unit per box', compute='_compute_unit_per_box')
     unit_per_bag = fields.Float('Unit per bag')
+    separator = fields.Float ('Quantity Separator')
     adhesive_label_box = fields.Many2one('product.product', 'adhesive label box')
     adhesive_label = fields.Many2one('product.product', 'adhesive label bag')
     version_datetime = fields.Datetime('Datetime Version', default=fields.Datetime.now())
@@ -310,25 +318,31 @@ class DataSheet(models.Model):
     # cambios excel
     production_waste_ids = fields.One2many('waste.production', 'sheet_id', 'Production and Scrap')
     waste_ids = fields.One2many('waste.production', 'sheet_id', 'Scrap')
-    waste_total = fields.Float('Total Scrap', compute='_compute_waste_total')
-    length_order = fields.Float('Order Length',compute='_compute_length_order')
+    waste_total = fields.Float('Total Scrap', compute='_compute_waste_total',digits=(6,6))
+    length_order = fields.Float('Order Length',compute='_compute_length_order',digits=(6,6))
     length_waste = fields.Float('Scrap Length', compute='_compute_length_waste')
     printer = fields.Char('Printer', compute='_compute_printer')
-    blade_width = fields.Float('Blade Width', compute='_compute_blade_width')
-    area_per_unit = fields.Float('Area per Unit', compute='_compute_area_per_unit')
-    total_area_cold_foil = fields.Float('Total Area Cold Foil', compute='_compute_total_area_cold_foil')
+    blade_width = fields.Float('Blade Width', compute='_compute_blade_width',digits=(6,6))
+    area_per_unit = fields.Float('Area per Unit', compute='_compute_area_per_unit',digits=(6,6))
+    total_area_cold_foil = fields.Float(compute='_compute_total_area_cold_foil',digits=(6,8))
+    total_area_cold_foil_1 = fields.Float('Total Area Cold Foil', compute='_compute_total_area_cold_foil_1',digits=(10,10))
     nazdar_adhesive_id = fields.Many2one('product.product','Nazdar Adhesive')
-    weigth_roll = fields.Float('Weigth Roll (Kg)', compute='_compute_weigth_roll')
+    weigth_roll = fields.Float('Weigth Roll (Kg)', compute='_compute_weigth_roll',digits=(6,6))
     unit = fields.Char(compute='_compute_unit')
-    uds_m = fields.Float('Uds/m', compute='_compute_uds_m')
-    uds_roll = fields.Float('Uds/roll',compute='_compute_uds_roll')
-    weigth_m = fields.Float('Weigth/m',compute='_compute_weigth_m')
-    uds_kg = fields.Float('Uds/Kg', compute="_compute_uds_kg")
-    total_rolls = fields.Float('Total Rolls', compute='_compute_total_rolls')
-    required_meters = fields.Float('Required Meters',compute='_compute_required_meters')
-    meters_scrap = fields.Float('Meters with Scrap', compute='_compute_meters_scrap')
-    total_weigth = fields.Float('Total Weigth', compute='_compute_total_weigth')
-    total_weigth_scrap = fields.Float('Total Weigth with Scrap',compute='_compute_total_weigth_scrap')
+    uds_m = fields.Float('Uds/m', compute='_compute_uds_m',digits=(6,6))
+    uds_roll = fields.Float('Uds/roll',compute='_compute_uds_roll',digits=(6,6))
+    weigth_m = fields.Float('Weigth/m',compute='_compute_weigth_m',digits=(6,6))
+    uds_kg = fields.Float('Uds/Kg', compute="_compute_uds_kg",digits=(6,6))
+    total_rolls = fields.Float(compute='_compute_total_rolls',digits=(6,6))
+    total_rolls_1 = fields.Float('Total Rolls', compute='_compute_total_rolls_1',digits=(6,6))
+    required_meters = fields.Float(compute='_compute_required_meters',digits=(6,6))
+    required_meters_1 = fields.Float('Required Meters',compute='_compute_required_meters_1',digits=(6,6))
+    meters_scrap = fields.Float(compute='_compute_meters_scrap',digits=(6,6))
+    meters_scrap_1 = fields.Float('Meters with Scrap', compute='_compute_meters_scrap_1',digits=(6,12))
+    total_weigth = fields.Float(compute='_compute_total_weigth',digits=(6,6))
+    total_weigth_1 = fields.Float('Total Weigth', compute='_compute_total_weigth_1',digits=(6,6))
+    total_weigth_scrap = fields.Float(compute='_compute_total_weigth_scrap',digits=(6,6))
+    total_weigth_scrap_1 = fields.Float('Total Weigth with Scrap',compute='_compute_total_weigth_scrap_1',digits=(6,6))
     bag_to_box = fields.Integer('Bag by Box', compute='_compute_bag_to_box')
     user_id = fields.Many2one('res.users', 'Responsible', compute='_compute_user_id')
 
@@ -340,7 +354,96 @@ class DataSheet(models.Model):
     constant_ink = fields.Float('Ink Constant',default=0.45)
     constant_movie = fields.Float('Movie Constant',default=0.44)
 
-    weigth_per_unit = fields.Float(compute='_compute_weigth_per_unit')
+    weigth_per_unit = fields.Float(compute='_compute_weigth_per_unit',digits=(6,6))
+
+    quantity_unit = fields.Float(compute='_compute_quantity_unit')
+    
+    #from here Cristian
+    zone_of_partner = fields.Char('Zona', compute='_compute_zone_of_partner')
+    number_of_colors = fields.Integer('Numero de colores',compute='_compute_number_of_colors',default=0, strore=True)
+    
+    @api.depends('partner_id')
+    def _compute_zone_of_partner(self):
+        if self.partner_id:
+            self.zone_of_partner = self.partner_id.zone_s_id.name
+        else:
+            self.zone_of_partner = None
+            
+
+    @api.depends('partner_id')
+    def _compute_zip(self):
+        if self.partner_id:
+            self.zip = self.partner_id.zip
+        else:
+            self.zip = None
+    
+    @api.depends('print_color_ids')
+    def _compute_number_of_colors(self):
+        logger.info('******************************************77770****************************')
+        if self.print_color_ids:
+            self.number_of_colors = len(self.print_color_ids)
+            logger.info(self.number_of_colors)
+        else:
+            self.number_of_colors = 0
+        """if self.print_color_ids:
+            for line in self.print_color_ids:
+                num = num +1
+            #self.number_of_colors = num
+        else:
+            num = 0
+            #self.number_of_colors = num
+            #logger.info('******************************************77771****************************')
+        vals = {
+            'number_of_colors' : num,
+        }
+        self.write(vals)"""
+        
+        
+        """num = 0
+        if self.print_color_ids:
+            for line in self.print_color_ids:
+                num =+ 1
+            self.number_of_colors = num"""
+        
+    
+    """@api.onchange('color_movie_id_1')
+    def _onchange_color_movie_id_1(self):
+        if self.meters_scrap and self.quantity:
+            quantity = self.meters_scrap/int(self.quantity)
+        else:
+            quantity = 0
+        values = []
+        if self.color_movie_id_1:
+            self.line_ids.search([('field_char', '=', 'color_movie_id_1')]).unlink()
+            dic = {
+                'field_char': 'color_movie_id_1',
+                'product_id': self.color_movie_id_1.id,
+                'product_qty': quantity,
+                'uom_id': self.color_movie_id_1.uom_id.id,
+                'standard_price': self.color_movie_id_1.standard_price,
+                'total': self.color_movie_id_1.standard_price*quantity,
+            }
+            values.append((0,0,dic))
+        if values:
+            self.write({'line_ids': values})"""
+            
+    #to here Cristian
+    
+    def _compute_quantity_ordered(self):
+        self.quantity_ordered = int(self.quantity_unit)
+    
+    def _compute_quantity(self):
+        self.quantity = 1
+    
+    @api.depends('quantity_ordered','constant_minimun_meter')
+    def _compute_quantity_unit(self):
+        if self.uom_id.name == 'Unidades' and self.uds_m != 0:
+            pre_quantity = math.ceil(self.uds_m*self.constant_minimun_meter)
+            pos = int(pre_quantity/100)+1
+            quantity = pos * 100
+            self.quantity_unit = quantity
+        else:
+            self.quantity_unit = 0
 
     def _compute_weigth_per_unit(self):
         if self.average_label_weight and self.uom_id.name == 'Unidades':
@@ -363,7 +466,12 @@ class DataSheet(models.Model):
     order_after = fields.Many2one('sale.order', 'Ultimate order')
 
     def _compute_length_order(self):
-        self.length_order = self.required_meters
+        if self.uom_id.name == 'Unidades' and self.uds_m!= 0:
+            self.length_order = int(self.quantity)/self.uds_m
+        elif self.uom_id.name == 'ROL' and self.meter_per_roll:
+            self.length_order = int(self.quantity)/int(self.meter_per_roll)
+        else:
+            self.length_order = 0
 
     @api.depends('uom_id')
     def _compute_total_weigth_scrap(self):
@@ -371,6 +479,13 @@ class DataSheet(models.Model):
             self.total_weigth_scrap = self.weigth_per_unit*int(self.quantity)/1000*(self.waste_total/100)+self.weigth_per_unit*int(self.quantity)/1000
         else:
             self.total_weigth_scrap = 0
+
+    @api.depends('uom_id')
+    def _compute_total_weigth_scrap_1(self):
+        if self.weigth_per_unit and self.quantity_ordered != 0:
+            self.total_weigth_scrap_1 = self.weigth_per_unit*self.quantity_ordered/1000*(self.waste_total/100)+self.weigth_per_unit*self.quantity_ordered/1000
+        else:
+            self.total_weigth_scrap_1 = 0
 
     @api.depends('uom_id')
     def _compute_weigth_m(self):
@@ -419,6 +534,17 @@ class DataSheet(models.Model):
                 record.required_meters = int(record.quantity)*record.meter_per_roll
 
     @api.depends('uom_id')
+    def _compute_required_meters_1(self):
+        for record in self:
+            if record.uom_id.name == 'Unidades':
+                if record.uds_m != 0:
+                    record.required_meters_1 = record.quantity_ordered/record.uds_m
+                else:
+                    record.required_meters_1 = 0
+            else:
+                record.required_meters_1 = record.quantity_ordered*record.meter_per_roll
+
+    @api.depends('uom_id')
     def _compute_total_rolls(self):
         for record in self:
             if record.uom_id.name == 'Unidades':
@@ -430,14 +556,25 @@ class DataSheet(models.Model):
                 record.total_rolls = int(record.quantity)*record.meter_per_roll
 
     @api.depends('uom_id')
+    def _compute_total_rolls_1(self):
+        for record in self:
+            if record.uom_id.name == 'Unidades':
+                if record.uds_m != 0:
+                    record.total_rolls_1 =  record.quantity_ordered/record.uds_m
+                else:
+                    record.total_rolls_1 = 0
+            else:
+                record.total_rolls_1 = record.quantity_ordered*record.meter_per_roll
+
+    @api.depends('uom_id')
     def _compute_uds_m(self):
         for record in self:
             if record.uom_id.name == 'Unidades' and record.specification_long_id:
-                record.uds_m = int(1000 / (record.specification_long_id.name
-                                           + record.sealing_tab + record.guillotine_mm))
+                record.uds_m = 1000 / (record.specification_long_id.name
+                                           + record.sealing_tab + record.guillotine_mm)
             elif record.uom_id.name == 'ROLLO' and record.specification_long_id:
-                record.uds_m = int(1000 / (record.specification_long_id.name
-                                           + record.sealing_tab + record.guillotine_mm))
+                record.uds_m = 1000 / (record.specification_long_id.name
+                                           + record.sealing_tab + record.guillotine_mm)
             else:
                 record.uds_m = 0.0
 
@@ -464,12 +601,28 @@ class DataSheet(models.Model):
         else:
             self.total_weigth = 0
 
+    @api.depends('uom_id')
+    def _compute_total_weigth_1(self):
+        if self.weigth_roll and self.quantity and self.uom_id.name == 'ROL':
+            self.total_weigth_1 = (self.weigth_roll * self.quantity_ordered) / 1000
+        elif self.uom_id.name =='Unidades' and self.quantity and self.average_label_weight:
+            self.total_weigth_1 = (self.average_label_weight * self.quantity_ordered) / 1000
+        else:
+            self.total_weigth_1 = 0
+
     @api.depends('waste_total', 'required_meters')
     def _compute_meters_scrap(self):
         if self.waste_total and self.required_meters:
             self.meters_scrap = self.required_meters / (1 - (self.waste_total/100))
         else:
             self.meters_scrap = 0
+            
+    @api.depends('waste_total', 'required_meters_1')
+    def _compute_meters_scrap_1(self):
+        if self.waste_total and self.required_meters_1:
+            self.meters_scrap_1 = self.required_meters_1 / (1 - (self.waste_total/100))
+        else:
+            self.meters_scrap_1 = 0
 
     @api.depends('uom_id.name')
     def _compute_unit(self):
@@ -478,25 +631,39 @@ class DataSheet(models.Model):
         else:
             self.unit = 'gr'
 
-    @api.depends('cold_foil_width', 'specification_long_id.name', 'quantity')
+    @api.depends('cold_foil_width', 'specification_long_id', 'quantity')
     def _compute_total_area_cold_foil(self):
-        if self.cold_foil_width and self.specification_long_id.name and self.quantity:
+        if self.cold_foil_width >= 60 and self.specification_long_id.name and self.quantity:
             self.total_area_cold_foil = ((((self.cold_foil_width + 3) / 1000) * self.specification_long_id.name
+                                          / 1000)) * int(self.quantity)
+        elif self.cold_foil_width < 60 and self.specification_long_id.name and self.quantity:
+            self.total_area_cold_foil = ((((60 + 3) / 1000) * self.specification_long_id.name
                                           / 1000)) * int(self.quantity)
         else:
             self.total_area_cold_foil = 0
 
-    @api.depends('blade_width', 'specification_long_id.name', 'sealing_tab', 'guillotine_mm')
+    @api.depends('cold_foil_width', 'specification_long_id.name', 'quantity_ordered')
+    def _compute_total_area_cold_foil_1(self):
+        if self.cold_foil_width > 60 and self.specification_long_id.name and self.quantity_ordered:
+            self.total_area_cold_foil_1 = ((((self.cold_foil_width + 3) / 1000) * self.specification_long_id.name
+                                          / 1000)) * self.quantity_ordered
+        elif self.cold_foil_width < 60 and self.specification_long_id.name and self.quantity:
+            self.total_area_cold_foil_1 = ((((60 + 3) / 1000) * self.specification_long_id.name
+                                          / 1000)) * self.quantity_ordered
+        else:
+            self.total_area_cold_foil_1 = 0
+
+    @api.depends('planned_witdh', 'specification_long_id.name', 'sealing_tab', 'guillotine_mm')
     def _compute_area_per_unit(self):
-        if self.blade_width and self.specification_long_id.name and self.sealing_tab and self.guillotine_mm:
-            self.area_per_unit = self.blade_width * ((self.specification_long_id.name + self.sealing_tab +
+        if self.planned_witdh and self.specification_long_id.name:
+            self.area_per_unit = float(self.blade_width) * ((self.specification_long_id.name + self.sealing_tab +
                                                       self.guillotine_mm) / 1000)
         else:
             self.area_per_unit = 0
 
-    @api.depends('specification_width_id.name', 'overlap_id.name', 'color_scale_id.name', 'specification_width_planned')
+    @api.depends('specification_width_id', 'overlap_id','specification_width_planned')
     def _compute_blade_width(self):
-        if self.specification_width_planned and self.specification_width_id.name and self.overlap_id.name and self.color_scale_id.name:
+        if self.specification_width_planned and self.specification_width_id.name and self.overlap_id.name: #and self.color_scale_id.name:
             self.blade_width = ((((self.specification_width_id.name * 2) + self.overlap_id.name) * \
                                  int(self.specification_width_planned)) + self.color_scale_id.name) / 1000
         else:
@@ -517,14 +684,10 @@ class DataSheet(models.Model):
             else:
                 record.printer = 'MK P5'
 
-    @api.depends('specification_width_planned', 'waste_total', 'length_order')
+    @api.depends('meters_scrap')
     def _compute_length_waste(self):
-        if self.specification_width_planned and self.waste_total and self.length_order:
-            self.length_waste = self.length_order / ((1 - self.waste_total)
-                                                     / int(self.specification_width_planned))
-        else:
-            self.length_waste = 0
-
+        self.length_waste = self.meters_scrap
+            
     @api.depends('waste_ids.routing', 'waste_ids.average')
     def _compute_waste_total(self):
         waste_total = 0
@@ -550,7 +713,7 @@ class DataSheet(models.Model):
                 if record.average_label_weight == 0.0:
                     record.unit_per_box = 0.0
                 elif record.average_label_weight:
-                    _box = (22.0 * 1000.0) / record.average_label_weight
+                    _box = (20.0 * 1000.0) / record.average_label_weight
                     per_box = int(_box) / 100
                     boxes = int(per_box) * 100
                     record.unit_per_box = boxes
@@ -954,7 +1117,7 @@ class DataSheet(models.Model):
     #Bill of Material
     @api.onchange('print_color_ids')
     def _onchange_print_color_ids(self):
-        values = [(5,0,0)]
+        values = []
         count = 0
         for lines in self.print_color_ids:#[count]:
             count +=1
@@ -980,14 +1143,22 @@ class DataSheet(models.Model):
             'standard_price': lines.standard_price,
             'total': lines.standard_price*quantity,
             }
-            values.append((0, 0, dic))
-            if values:
-                self.write({'line_ids': values})
+            flag = True
+            for lm in self.line_ids:
+                if lm.product_id == lines.product_id:
+                    self.write({
+                        'line_ids':[(1,lm.id,dic)]
+                    })
+                    flag = False
+            if flag:
+                values.append((0, 0, dic))
+        if values:
+            self.write({'line_ids': values})
 
     @api.onchange('sellalit_glue')
     def _onchange_sellalit_glue(self):
         if self.constant_glue and self.constant_minimun_meter and self.quantity:
-            quantity = (self.constant_glue*self.constant_minimun_meter)/int(self.quantity)
+            quantity = self.constant_glue*self.meters_scrap #self.constant_minimun_meter)/int(self.quantity)
         else:
             quantity = 0
         values = []
@@ -1029,8 +1200,9 @@ class DataSheet(models.Model):
     @api.onchange('cast_product_id')
     def _onchange_cast_product_id(self):
         if self.cast_width and self.quantity:
-            total = (((int(self.cast_width)+3)/1000*self.specification_long_id.name)*int(self.quantity))
-            quantity = total/int(self.quantity)
+            total = ((int(self.cast_width)+3)/1000*self.specification_long_id.name)/1000
+            pre_quantity = total*1.1*int(self.quantity)
+            quantity = pre_quantity
         else:
             quantity = 0
         values = []
@@ -1068,20 +1240,20 @@ class DataSheet(models.Model):
 
     @api.onchange('rod_adhesive_id')
     def _onchange_rod_adhesive_id(self):
-        waste = 0
-        for record in self.waste_ids:
-            if record.operations == 'Pegado' and record.routing:
-                waste += record.quantity_entered
+        if self.rod_number and self.meters_scrap and self.constant_adhesive and self.quantity:
+            quantity = (self.rod_number*self.meters_scrap*self.constant_adhesive)/int(self.quantity)
+        else:
+            quantity = 0
         values = []
         if self.rod_adhesive_id:
             self.line_ids.search([('field_char', '=', 'rod_adhesive_id')]).unlink()
             dic = {
                 'field_char': 'rod_adhesive_id',
                 'product_id': self.rod_adhesive_id.id,
-                'product_qty': waste,
+                'product_qty': quantity,
                 'uom_id': self.rod_adhesive_id.uom_id.id,
                 'standard_price': self.rod_adhesive_id.standard_price,
-                'total': self.rod_adhesive_id.standard_price * waste,
+                'total': self.rod_adhesive_id.standard_price * quantity,
             }
             values.append((0, 0, dic))
         if values:
@@ -1096,14 +1268,16 @@ class DataSheet(models.Model):
     def _onchange_bag(self):
         values = []
         if self.bag:
+            pre_quantity = math.ceil(self.quantity_ordered/self.unit_per_bag)#int(self.quantity)/self.unit_per_bag
+            quantity = pre_quantity/self.quantity_ordered
             self.line_ids.search([('field_char', '=', 'bag')]).unlink()
             dic = {
                 'field_char': 'bag',
                 'product_id': self.bag.id,
-                'product_qty': 1,
+                'product_qty': quantity,
                 'uom_id': self.bag.uom_id.id,
                 'standard_price': self.bag.standard_price,
-                'total': self.bag.standard_price,
+                'total': self.bag.standard_price*quantity,
             }
             values.append((0, 0, dic))
         if values:
@@ -1130,10 +1304,8 @@ class DataSheet(models.Model):
     @api.onchange('movie_type_product_ids')
     def _onchange_movie_type_product_ids(self):
         values = []
-        count = 0
         if self.movie_type_product_ids:
-            for lines in self.movie_type_product_ids[count]:
-                count +=1
+            for lines in self.movie_type_product_ids:
                 dic = {
                 'product_id': lines.product_id.id,
                 'product_qty': self.total_weigth_scrap,
@@ -1141,7 +1313,15 @@ class DataSheet(models.Model):
                 'standard_price': lines.standard_price,
                 'total': lines.standard_price*self.total_weigth_scrap,
                 }
-                values.append((0, 0, dic))
+                flag = True
+                for lm in self.line_ids:
+                    if lm.product_id == lines.product_id:
+                        self.write({
+                            'line_ids':[(1,lm.id,dic)]
+                        })
+                        flag = False
+                if flag:
+                    values.append((0, 0, dic))
             if values:
                 self.write({'line_ids': values})
 
@@ -1151,38 +1331,46 @@ class DataSheet(models.Model):
             quantity = self.total_area_cold_foil/int(self.quantity)
         else:
             quantity = 0
-        values = [(5,0,0)]
+        values = []
         if self.cold_foil_ids:
             for lines in self.cold_foil_ids:
                 dic = {
                     'product_id': lines.product_id.id,
                     'product_qty': quantity,
                     'uom_id': lines.uom_id.id,
-                    'standard_price': lines.standard_price,
-                    'total': lines.standard_price * quantity,
+                    'standard_price': lines.product_id.standard_price,
+                    'total': lines.product_id.standard_price * quantity,
                 }
-                values.append((0, 0, dic))
+                flag = True
+                for lm in self.line_ids:
+                    if lm.product_id == lines.product_id:
+                        self.write({
+                            'line_ids':[(1,lm.id,dic)]
+                        })
+                        flag = False
+                if flag:
+                    values.append((0, 0, dic))
             if values:
                 self.write({'line_ids': values})
 
     @api.onchange('color_movie_id_1')
     def _onchange_color_movie_id_1(self):
-        waste = 0
-        for record in self.waste_ids:
-            if record.operations == 'Pegado' and record.routing:
-                waste += record.quantity_entered
+        if self.meters_scrap and self.quantity:
+            quantity = self.meters_scrap/int(self.quantity)
+        else:
+            quantity = 0
         values = []
         if self.color_movie_id_1:
             self.line_ids.search([('field_char', '=', 'color_movie_id_1')]).unlink()
             dic = {
                 'field_char': 'color_movie_id_1',
                 'product_id': self.color_movie_id_1.id,
-                'product_qty': waste,
+                'product_qty': quantity,
                 'uom_id': self.color_movie_id_1.uom_id.id,
                 'standard_price': self.color_movie_id_1.standard_price,
-                'total': self.color_movie_id_1.standard_price*waste,
+                'total': self.color_movie_id_1.standard_price*quantity,
             }
-            values.append((0, 0, dic))
+            values.append((0,0,dic))
         if values:
             self.write({'line_ids': values})
 
@@ -1190,14 +1378,16 @@ class DataSheet(models.Model):
     def _onchange_box(self):
         values = []
         if self.box:
+            pre_quantity = math.ceil(self.quantity_ordered/self.unit_per_box)#int(self.quantity)/self.unit_per_box
+            quantity = pre_quantity/self.quantity_ordered
             self.line_ids.search([('field_char', '=', 'box')]).unlink()
             dic = {
                 'field_char': 'box',
                 'product_id': self.box.id,
-                'product_qty': 1,
+                'product_qty': quantity,
                 'uom_id': self.box.uom_id.id,
                 'standard_price': self.box.standard_price,
-                'total': self.box.standard_price,
+                'total': self.box.standard_price*quantity,
             }
             values.append((0, 0, dic))
         if values:
@@ -1418,10 +1608,10 @@ class WasteProduction(models.Model):
 
     def _compute_quantity_entered(self):
         for record in self:
-            if record.name.name == 'slitter' and record.work_center_id.name == 'Sltt. 4':
+            if record.name.name == 'Slitter 4' and record.work_center_id.name == 'SLITTER 4':
                 record.quantity_entered = record.sheet_id.length_waste
             else:
-                record.quantity_entered = 1-(record.sheet_id.length_waste/100) 
+                record.quantity_entered = record.sheet_id.length_waste*(1-(100)/100) 
 
     @api.depends('name', 'work_center_id', 'average_waste')
     def _compute_waste(self):

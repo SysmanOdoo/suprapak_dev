@@ -10,6 +10,9 @@
                 <xpath expr="//field[@name='parent_id']" position="after">
                     <field name="bool_parent" invisible="True"/>
                 </xpath>
+                <xpath expr="//group[@name='sale']/field[@name='user_id']" position="before">
+                    <field name="sale_journal_id" domain="[('type','=','sale')]"/>
+                </xpath>
             </field>
         </record>
     </data>

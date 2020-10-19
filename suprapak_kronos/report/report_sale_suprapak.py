@@ -6,9 +6,10 @@ class SaleSuprapak(models.Model):
 
     production_id = fields.Many2one('mrp.production', 'Production', compute='_compute_production_id')
     type_sale = fields.Selection([('nu', 'NU'), ('re', 'RE'), ('rc', 'RC'), ('r1', 'R1')], 'Tipo de pedido',
-                                 compute='_compute_type_sale')
+                                 compute='_compute_type_sale',store=True)
     bool_client = fields.Boolean('Customer does not Satisfated?')
     order_production_id = fields.Many2one('mrp.production', 'Production Order')
+    programing_meters = fields.Integer(compute='_compute_programing_meters',store=True)
 
     def split(self):
         return list(self)
@@ -22,27 +23,31 @@ class SaleSuprapak(models.Model):
             cod_vendor = ''
         return cod_vendor
 
-    def programing_meters(self):
+    def _compute_programing_meters(self):
         programming_meter = 0
-        kronos_id = self.env['data.sheet'].search([('name', '=', self.sheet_id.name)])
-        if kronos_id.uom_id.name == 'Unidades':
-            if len(kronos_id.print_color_ids) > 6:
-                programming = int(int(kronos_id.quantity) / kronos_id.uds_m)
-                meter = int(programming/100)+1
-                programming_meter = (meter * 100) + 200
+        for record in self:
+            kronos_id = record.sheet_id
+            if kronos_id and kronos_id.uom_id.name == 'Unidades':
+                if len(kronos_id.print_color_ids) > 6:
+                    programming = int(int(kronos_id.quantity) / kronos_id.uds_m)
+                    meter = int(programming/100)+1
+                    programming_meter = (meter * 100) + 200
+                    record.programing_meters = programming_meter
+                else:
+                    programming = int(int(kronos_id.quantity) / kronos_id.uds_m)
+                    meter = int(programming / 100) + 1
+                    programming_meter = (meter * 100) + 100
+                    record.programing_meters = programming_meter
             else:
-                programming = int(int(kronos_id.quantity) / kronos_id.uds_m)
-                meter = int(programming / 100) + 1
-                programming_meter = (meter * 100) + 100
-        else:
-            programming_meter = 0
-        return programming_meter
+                programming_meter = 0
+                record.programing_meters = programming_meter
 
     def _compute_production_id(self):
         for record in self:
             mrp = record.env['mrp.production'].search([('origin', '=', record.name)], limit=1)
             record.production_id = mrp if mrp else False
             print(mrp)
+
     def _compute_type_sale(self):
         for record in self:
             if record.bool_client:

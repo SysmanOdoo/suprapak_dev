@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+      <record id="mrp_suprapak_extended_workorder_tree_view" model="ir.ui.view">
+            <field name="name">mrp.suprapak.extended.workorder.inherit.tree.view</field>
+            <field name="model">mrp.workorder</field>
+            <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_view_inherit"/>
+            <field name="arch" type="xml"> 
+             <xpath expr="//field[@name='name']" position="before">
+                <field name="id"/>
+             </xpath>
+             <xpath expr="//field[@name='state']" position="after">
+                 <field name="duration" widget="float_time"/>
+             </xpath>
+            <!--Cristian Casas-->
+             <xpath expr="//field[@name='duration']" position="before">
+                 <field name="real_time_operator" widget="float_time"/>
+             </xpath>
+                
+            <xpath expr="//field[@name='duration']" position="before">
+                 <field name="operators"  invisible="1"/>
+             </xpath>
+            <!--Cristian Casas-->
+             <xpath expr="//field[@name='name']" position="before">
+                <field name="id"/>
+             </xpath>  
+            </field>
+        </record>
+    </data>
+</odoo>

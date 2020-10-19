@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="product_template_inherit_form" model="ir.ui.view">
+            <field name="name">product.template.inherit.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='default_code']" position="before">
+                    <field name="subgroups_ids" string="Sub-Categoría"/>
+                </xpath>
+            </field>
+        </record> 
+
+        <record model="ir.actions.act_window" id="product_subproduct_menu_action">
+            <field name="name">Categoría de productos suprapak</field>
+            <field name="res_model">product.template.subgroup</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="product_template_subproduct_menu" parent="stock.menu_warehouse_config" name="CATEGORIA DE PRODUCTOS SUPRAPAK" action="product_suprapak.product_subproduct_menu_action" sequence="6"/>
+    </data>
+</odoo>

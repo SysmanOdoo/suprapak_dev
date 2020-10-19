@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-28 20:05+0000\n"
-"PO-Revision-Date: 2020-07-28 20:05+0000\n"
+"POT-Creation-Date: 2020-09-18 00:50+0000\n"
+"PO-Revision-Date: 2020-09-18 00:50+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,14 +16,187 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid ""
+"<br/>\n"
+"                            A.A. 10050 CALI-COLOMBIA<br/>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid ""
+"<br/>\n"
+"                            PBX:"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid ""
+"<span groups=\"account.group_show_line_subtotals_tax_excluded\">AMOUNT</span>\n"
+"                                    <span groups=\"account.group_show_line_subtotals_tax_included\">TOTAL PRICE</span>"
+msgstr ""
+"<span groups=\"account.group_show_line_subtotals_tax_excluded\">SUBTOTAL</span>\n"
+"                                    <span groups=\"account.group_show_line_subtotals_tax_included\">PRECIO TOTAL</span>"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.view_budget_wizard_form
+msgid "<span> Budget Limit Exceeded</span>"
+msgstr ""
+
+#. module: account_suprapak
 #: model_terms:ir.ui.view,arch_db:account_suprapak.view_budget_wizard_form
 msgid "<span> Budget Limit Exceeded</span>"
 msgstr "<span> Limite de Presupuesto Excedido</span>"
 
 #. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<span>% TAX</span>"
+msgstr "<span>% IMPUESTO</span>"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<span>DESCRIPTION</span>"
+msgstr "<span>DESCRIPCION</span>"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<span>ITEM</span>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<span>ORDEN DE COMPRA</span>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<span>PEDIDO</span>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<span>PRICE</span>"
+msgstr "<span>PRECIO</span>"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<span>QUANTITY</span>"
+msgstr "<span>CANTIDAD</span>"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<span>TAXES</span>"
+msgstr "<span>IMPUESTOS</span>"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<span>TOTAL PRICE</span>"
+msgstr "<span>PRECIO TOTAL</span>"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<span>UND</span>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<strong class=\"mr16\">Subtotal</strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<strong>DESPACHADO A:</strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid "<strong>Date of validation:</strong>"
+msgstr "Fecha de validación"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<strong>Desc.</strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid "<strong>Factura Borrador</strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid "<strong>Factura Cancelada</strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid "<strong>Factura de Venta Electrónica</strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid "<strong>Nota Crédito Borrador</strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid "<strong>Nota Crédito Cancelada</strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid "<strong>Nota Crédito N° </strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid "<strong>Nota Débito Borrador</strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid "<strong>Nota Débito Cancelada</strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid "<strong>Nota Débito N° </strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<strong>Subtotal</strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<strong>Total</strong>"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "<strong>VENDIDO A:</strong>"
+msgstr ""
+
+#. module: account_suprapak
 #: model:ir.model.constraint,message:account_suprapak.constraint_account_asset_plaque_uniq
 msgid "A asset with the same plaque already exists."
 msgstr "Un activo tiene la misma placa, esta placa ya existe"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid "Act. Econ"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.view_move_form
+msgid "Add a second observation..."
+msgstr "Agregue una segunda observación ..."
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.view_move_form
+msgid "Add an observation..."
+msgstr "Agregue una observación ..."
 
 #. module: account_suprapak
 #: model:ir.model,name:account_suprapak.model_account_asset
@@ -47,9 +220,39 @@ msgid "Budget Wizard limit"
 msgstr "Limite de presupuesto ventana emergente"
 
 #. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "CANTIDAD"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "CIUDAD"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "CONCEPTO POR DEVOLUCIÓN:"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "CUDE:"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "CUFE:"
+msgstr ""
+
+#. module: account_suprapak
 #: model_terms:ir.ui.view,arch_db:account_suprapak.view_inherit_account_move_form
 msgid "Cancel Entry"
 msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move__carrier_id
+msgid "Carrier"
+msgstr "Transportista"
 
 #. module: account_suprapak
 #: model:ir.model,name:account_suprapak.model_res_partner
@@ -58,11 +261,13 @@ msgstr "Contacto"
 
 #. module: account_suprapak
 #: model:ir.model.fields,field_description:account_suprapak.field_budget_wizard__create_uid
+#: model:ir.model.fields,field_description:account_suprapak.field_dispatch_route__create_uid
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: account_suprapak
 #: model:ir.model.fields,field_description:account_suprapak.field_budget_wizard__create_date
+#: model:ir.model.fields,field_description:account_suprapak.field_dispatch_route__create_date
 msgid "Created on"
 msgstr "Creado en"
 
@@ -72,29 +277,135 @@ msgid "Data"
 msgstr "Datos"
 
 #. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_bank_statement_import_journal_creation__description_pa
+#: model:ir.model.fields,field_description:account_suprapak.field_account_journal__description_pa
+msgid "Description Autonomous Heritage"
+msgstr "Descripción Patrimonio Autónomo"
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move__dispatch_route
+msgid "Dispatch route"
+msgstr "Ruta de despacho"
+
+#. module: account_suprapak
+#: model:ir.model,name:account_suprapak.model_dispatch_route
+msgid "Dispatch routes"
+msgstr "Ruta de despacho"
+
+#. module: account_suprapak
 #: model:ir.model.fields,field_description:account_suprapak.field_budget_wizard__display_name
+#: model:ir.model.fields,field_description:account_suprapak.field_dispatch_route__display_name
 msgid "Display Name"
-msgstr "Nombre"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "FECHA DE VENCIMIENTO"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "FECHA FACTURA"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "FIRMA Y SELLO:"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "FLETES"
+msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move__freight
+msgid "Freight"
+msgstr "Fletes"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "GUIA"
+msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move__gross_weight
+msgid "Gross weight"
+msgstr "Peso bruto"
 
 #. module: account_suprapak
 #: model:ir.model.fields,field_description:account_suprapak.field_budget_wizard__id
+#: model:ir.model.fields,field_description:account_suprapak.field_dispatch_route__id
 msgid "ID"
 msgstr ""
 
 #. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "INCOTERMS:"
+msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move__insurances
+msgid "Insurances"
+msgstr "Seguros"
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move__invoice_date
+msgid "Invoice/Bill Date"
+msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model,name:account_suprapak.model_account_journal
+msgid "Journal"
+msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model,name:account_suprapak.model_account_move
+msgid "Journal Entries"
+msgstr "Asientos contables"
+
+#. module: account_suprapak
+#: model:ir.model,name:account_suprapak.model_account_move_line
+msgid "Journal Item"
+msgstr "Apunte contable"
+
+#. module: account_suprapak
 #: model:ir.model.fields,field_description:account_suprapak.field_budget_wizard____last_update
+#: model:ir.model.fields,field_description:account_suprapak.field_dispatch_route____last_update
 msgid "Last Modified on"
 msgstr "Ultima modificacion en"
 
 #. module: account_suprapak
 #: model:ir.model.fields,field_description:account_suprapak.field_budget_wizard__write_uid
+#: model:ir.model.fields,field_description:account_suprapak.field_dispatch_route__write_uid
 msgid "Last Updated by"
 msgstr "Ultima modificacion por"
 
 #. module: account_suprapak
 #: model:ir.model.fields,field_description:account_suprapak.field_budget_wizard__write_date
+#: model:ir.model.fields,field_description:account_suprapak.field_dispatch_route__write_date
 msgid "Last Updated on"
 msgstr "Ultima modificacion en"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid "Logo"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "MEDIO DE PAGO:"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "MONEDA"
+msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move__payment_mean_code_id
+msgid "Mean of Payment"
+msgstr "Medio de Pago"
 
 #. module: account_suprapak
 #: model:ir.model.fields,field_description:account_suprapak.field_budget_wizard__message
@@ -102,9 +413,99 @@ msgid "Message"
 msgstr "Mensaje"
 
 #. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "NOMBRE DE ZONA"
+msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_dispatch_route__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move__net_weight
+msgid "Net weight"
+msgstr "Peso neto"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "No DE DOCUMENTO AFECTADO:"
+msgstr "N° DE DOCUMENTO AFECTADO:"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "No IDENTIFICACIÓN"
+msgstr "N° IDENTIFICACIÓN"
+
+#. module: account_suprapak
 #: model_terms:ir.ui.view,arch_db:account_suprapak.view_budget_wizard_form
 msgid "Notify"
 msgstr "Notificar"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "OBSERVACIONES ADICIONALES:"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "OBSERVACIONES:"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "OTROS"
+msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move__observation
+msgid "Observations"
+msgstr "Observaciones"
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move__observation_pa
+msgid "Observations PA"
+msgstr "Observaciones patrimonios autónomos"
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move_line__order
+msgid "Order"
+msgstr "Pedido"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.view_move_form
+msgid "Other expenses"
+msgstr "Otros Gastos"
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move__other_expenses
+msgid "Others"
+msgstr "Otros"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "PAIS"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "PESO BRUTO:"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "PESO NETO:"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "PLAZO"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid "Page: <span class=\"page\"/> de <span class=\"topage\"/>"
+msgstr "Página: <span class=\"page\"/> de <span class=\"topage\"/>"
 
 #. module: account_suprapak
 #: model:ir.model.fields,field_description:account_suprapak.field_res_partner__bool_parent
@@ -129,9 +530,35 @@ msgid "Post"
 msgstr ""
 
 #. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.view_invoice_form
+msgid "Purchase Order"
+msgstr "Orden de compra"
+
+#. module: account_suprapak
 #: model_terms:ir.ui.view,arch_db:account_suprapak.account_asset_inherit_form
 msgid "Reference"
 msgstr "Referencia"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "SEGUROS"
+msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model,name:account_suprapak.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model,name:account_suprapak.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_res_partner__sale_journal_id
+#: model:ir.model.fields,field_description:account_suprapak.field_res_users__sale_journal_id
+msgid "Sales invoice journal"
+msgstr "Diario de factura"
 
 #. module: account_suprapak
 #: model:ir.model.fields,field_description:account_suprapak.field_account_asset__stock_location_id
@@ -139,6 +566,91 @@ msgid "Stock Location"
 msgstr "Ubicación de Inventario"
 
 #. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "TELÉFONO"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "TIPO DE COMPRA:"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "TOTAL CAJAS:"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "TOTAL ITEMS:"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "TRANSPORTISTA:"
+msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model.fields,help:account_suprapak.field_account_bank_statement_import_journal_creation__description_pa
+#: model:ir.model.fields,help:account_suprapak.field_account_journal__description_pa
+msgid ""
+"Text to be displayed in the electronic invoice format in the additional "
+"observations"
+msgstr "Texto a visualizar en formato de factura electrónica en las observaciones adicionales"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_layout_suprapak
+msgid ""
+"This receipt has been issued by COMFIAR, the electronic invoicing software "
+"of APG Consulting Colombia SAS NIT: 901037591-1 www.comfiar.co"
+msgstr "Este comprobante ha sido emitido por COMFIAR el software de facturación electrónica de APG Consulting Colombia SAS NIT: 901037591-1 www.comfiar.co"
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move__total_boxes
+msgid "Total boxes"
+msgstr "Total cajas"
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_account_move__carrier_tracking_ref
+msgid "Tracking Reference"
+msgstr "Guía de seguimiento"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.account_invoice_form
+msgid "Transport"
+msgstr "Transporte"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "UNIDADES"
+msgstr ""
+
+#. module: account_suprapak
 #: model:ir.model.fields,field_description:account_suprapak.field_budget_wizard__users_ids
 msgid "Users"
+msgstr "Usuarios"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "VALOR EN LETRAS:"
 msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "VENDEDOR"
+msgstr ""
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "VIA DE DESPACHO"
+msgstr ""
+
+#. module: account_suprapak
+#: model:ir.model.fields,field_description:account_suprapak.field_dispatch_route__code
+msgid "code"
+msgstr "Codigo"
+
+#. module: account_suprapak
+#: model_terms:ir.ui.view,arch_db:account_suprapak.report_invoice_document_suprapak
+msgid "on"
+msgstr "en"

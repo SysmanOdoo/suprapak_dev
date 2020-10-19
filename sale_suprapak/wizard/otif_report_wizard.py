@@ -133,9 +133,9 @@ class OtifReportWizard(models.TransientModel):
             production = self.env['mrp.production'].search([('origin', '=', order.name)],  limit=1)
             worksheet.write(i + 5,  6,  production.name if production else '',  general)
 
-            worksheet.write(i + 5,  7,  order.sheet_id.product_code or '', general)
+            worksheet.write(i + 5,  7,  order.sheet_id.zip or '', general)
             worksheet.write(i + 5,  8,  order.sheet_id.produce or '', general)
-            worksheet.write(i + 5,  9,  order.sheet_id.presentation_id.name or '', general)
+            worksheet.write(i + 5,  9,  order.sheet_id.movie_type_id.name or '', general)
             worksheet.write(i + 5,  10,  order.type_sale or '', general)
             worksheet.write(i + 5,  11,  order.sheet_id.presentation_id.name or '', general)
             worksheet.write(i + 5,  12,  order.sheet_id.produce or '', general)
@@ -153,7 +153,9 @@ class OtifReportWizard(models.TransientModel):
 
             picking = self.env['stock.picking'].search([('origin', '=', order.name)],  limit=1)
             worksheet.write(i + 5,  19,  picking.scheduled_date if picking else '',  general_datetime)
-            #worksheet.write(i + 5,  20,  obj.scheduled_date or '', general_datetime)eta
+            if picking:
+                eta = picking.scheduled_date + timedelta(int(picking.partner_id.average_days))
+            worksheet.write(i + 5,  20,  eta if picking else '', general_datetime)
             worksheet.write(i + 5,  23,  picking.date_done if picking else '', general_datetime)
             done = 0
             if picking:
@@ -163,9 +165,9 @@ class OtifReportWizard(models.TransientModel):
             worksheet.write(i + 5,  21,  production.date_planned_start if production else '',  general_datetime)
             worksheet.write(i + 5,  22,  production.date_planned_finished if production else '',  general_datetime)
             compliance = 0
-            #if order.date_order and order.effective_date:
-             #   compliance = self.operation_dates(order.date_order,  order.effective_date,  '-')
-            #worksheet.write(i + 5,  25,   if  else '',  general) diferencia en cumplimiento (dias)
+            if picking.date_client and production.date_planned_finished:
+                compliance = self.operation_dates(picking.date_client,  production.date_planned_finished,  '-')
+            worksheet.write(i + 5,  25,   compliance,  general)
             compliance = 0
             if order and picking:
                 for sale in order.order_line:
@@ -174,14 +176,17 @@ class OtifReportWizard(models.TransientModel):
                         else:
                             compliance += (sale.product_uom_qty/done)
             worksheet.write(i + 5,  26,   compliance,  general)
-            #worksheet.write(i + 5,  27,  production.date_planned_finished if production else '',  general_datetime)Dias en proceso PDN
+            pdn = 0
+            if picking.date_client and production.date_planned_start:
+                pdn = self.operation_dates(picking.date_client,  production.date_planned_finished,  '-')
+            worksheet.write(i + 5,  27,   pdn,  general_datetime)
             invoice = self.env['account.move'].search([('invoice_origin',  '=',  'order.name')],  limit=1)
             worksheet.write(i + 5,  28,  invoice.name if invoice else '',  general)
-            #worksheet.write(i + 5,  29,  invoice.name if invoice else '',  general)operador
-            #worksheet.write(i + 5,  30,  invoice.name if invoice else '',  general)no guia
+            worksheet.write(i + 5,  29,  picking.logistic_operator_id.name if picking else '',  general)
+            worksheet.write(i + 5,  30,  picking.number_guide if picking else '',  general)
             worksheet.write(i + 5,  31,  picking.date_done if picking else '',  general_datetime)
-            # worksheet.write(i + 5,  32,  invoice.name if invoice else '',  general)Fecha Real Entrega en Cliente
-            # worksheet.write(i + 5,  33,  invoice.name if invoice else '',  general)Tiempo de transito
+            worksheet.write(i + 5,  32,  picking.date_client if picking else '',  general_datetime)
+            worksheet.write(i + 5,  33,  picking.delivery_time if picking else '',  general)
             worksheet.write(i + 5,  34,  compliance ,  general)
 
 

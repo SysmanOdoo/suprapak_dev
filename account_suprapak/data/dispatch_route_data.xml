@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+        
+        <record id="dispatch_route_tl" model="dispatch.route">
+            <field name="name">Transporte Local</field>
+            <field name="code">TL</field>
+        </record>
+
+        <record id="dispatch_route_tt" model="dispatch.route">
+            <field name="name">Transporte Terrestre</field>
+            <field name="code">TT</field>
+        </record>
+
+        <record id="dispatch_route_a" model="dispatch.route">
+            <field name="name">Transporte Aéreo</field>
+            <field name="code">A</field>
+        </record>
+
+        <record id="dispatch_route_m" model="dispatch.route">
+            <field name="name">Transporte Marítimo</field>
+            <field name="code">M</field>
+        </record>
+    </data>
+</odoo>

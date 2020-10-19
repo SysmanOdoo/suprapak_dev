@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+        <!-- autonomous.heritage form view -->
+        <record id="autonomous_heritage_view_form" model="ir.ui.view">
+            <field name="name">autonomous.heritage.view.form</field>
+            <field name="model">autonomous.heritage</field>
+            <field name="arch" type="xml">
+                <form string="PA">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="code"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description" placeholder="Add a description..." nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- autonomous.heritage tree view -->
+        <record id="autonomous_heritage_view_tree" model="ir.ui.view">
+            <field name="name">autonomous.heritage.view.tree</field>
+            <field name="model">autonomous.heritage</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- autonomous.heritage search view -->
+        <record id="autonomous_heritage_view_search" model="ir.ui.view">
+            <field name="name">autonomous.heritage.view.search</field>
+            <field name="model">autonomous.heritage</field>
+            <field name="arch" type="xml">
+                <search string="PA">
+                    <field name="name"/>
+                    <field name="code"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- autonomous.heritge action window -->
+        <record id="autonomous_heritage_action" model="ir.actions.act_window">
+            <field name="name">Autonomous Heritge</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">autonomous.heritage</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p><p>
+                    <!-- More details about what a user can do with this object will be OK --> 
+                </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="autonomous_heritage_menu_act" name="Autonomous Heritage" parent="account.account_invoicing_menu" action="autonomous_heritage_action" sequence="7"/>
+    </data>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_complaint_claim,complaint.claim,model_complaint_claim,helpdesk.group_helpdesk_manager,1,1,1,1
+access_type_complaint,type.complaint,model_type_complaint,helpdesk.group_helpdesk_manager,1,1,1,1
+access_subtype_complaint,subtype.complaint,model_subtype_complaint,helpdesk.group_helpdesk_manager,1,1,1,1

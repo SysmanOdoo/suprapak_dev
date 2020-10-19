@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>  
+    <record id="stock_move_suprapak_fields_tr" model="ir.ui.view">
+        <field name="name">stock.move.suprapack.fields.tr</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml"> 
+            <xpath expr="//field[@name='move_ids_without_package']//field[@name='product_id']" position="after" >
+                <!--<field name="cant_cajas" attrs="{'column_invisible':[('parent.warehouse_id','!=',18)]}"/>-->
+                <!--<field name="peso_neto" attrs="{'column_invisible':[('parent.warehouse_id','!=',18)]}"/>-->
+                <field name="cant_cajas" attrs="{'column_invisible':[('parent.picking_type_id','!=',142),
+                                                ('parent.picking_type_id','!=',140),('parent.picking_type_id','!=',140),                         ('parent.picking_type_id','!=',140),('parent.picking_type_id','!=',141),('parent.picking_type_id','!=',143),
+('parent.picking_type_id','!=',144),('parent.picking_type_id','!=',145),('parent.picking_type_id','!=',139),
+('parent.picking_type_id','!=',138),]}"/>
+                <field name="peso_neto" attrs="{'column_invisible':[('parent.picking_type_id','!=',142),
+                                                ('parent.picking_type_id','!=',140),('parent.picking_type_id','!=',140),                         ('parent.picking_type_id','!=',140),('parent.picking_type_id','!=',141),('parent.picking_type_id','!=',143),
+('parent.picking_type_id','!=',144),('parent.picking_type_id','!=',145),('parent.picking_type_id','!=',139),
+('parent.picking_type_id','!=',138),]}"/>
+                <field name="peso_bruto" attrs="{'column_invisible':[('parent.picking_type_id','!=',142),
+                                                ('parent.picking_type_id','!=',140),('parent.picking_type_id','!=',140),                         ('parent.picking_type_id','!=',140),('parent.picking_type_id','!=',141),('parent.picking_type_id','!=',143),
+('parent.picking_type_id','!=',144),('parent.picking_type_id','!=',145),('parent.picking_type_id','!=',139),
+('parent.picking_type_id','!=',138),]}"/>
+                
+            </xpath>
+            
+        </field>  
+    </record>         
+</odoo>  
+

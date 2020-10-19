@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="helpdesk_form_inherit_view" model="ir.ui.view">
+            <field name="name">helpdesk.form1</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="priority">15</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ticket_type_id']" position="attributes">
+                    <attribute name='domain'>[('team_id','=',team_id)]</attribute>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="bool_tecnology" invisible="1"/>
+                    <field name="queja" invisible="1"/>
+                    <field name="reclamo" invisible="1"/>
+                    <field name="complain_type_id" options="{'no_create': True, 'no_create_edit':True}" attrs="{'invisible': [('bool_tecnology','=',True)]}"/>
+                    <field name="type_id" options="{'no_create': True, 'no_create_edit':True}" attrs="{'invisible': [('bool_tecnology','=',True)]}"/>
+                    <field name="subtype_id" options="{'no_create': True, 'no_create_edit':True}" attrs="{'invisible': [('bool_tecnology','=',True)]}"/>
+                    <field name="action_plan" attrs="{'invisible': [('queja','!=',True),('reclamo','!=',True)]}"/>
+                    <field name="credit_note" attrs="{'invisible': [('reclamo','!=',True)]}"/>
+                    <field name="replacement_material" attrs="{'invisible': [('reclamo','!=',True)]}"/>
+                    <field name="return_material" attrs="{'invisible': [('reclamo','!=',True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='type_id']" position="attributes">
+                    <attribute name='domain'>[('complain_type_id','=',complain_type_id)]</attribute>
+                </xpath>
+                <xpath expr="//field[@name='subtype_id']" position="attributes">
+                    <attribute name='domain'>[('type_id','=',type_id)]</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="replace">
+                    <field name="partner_id" class="field_partner_id" domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]" attrs="{'invisible': [('bool_tecnology','=',True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_name']" position="replace">
+                    <field name="partner_name" attrs="{'invisible': ['|', ('partner_id', '!=', False),('bool_tecnology','=',True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_email']" position="replace">
+                    <field name="partner_email" attrs="{'invisible': [('bool_tecnology','=',True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='email_cc']" position="replace">
+                     <field name="email_cc" groups="base.group_no_one" attrs="{'invisible': [('bool_tecnology','=',True)]}"/>
+                </xpath>
+                <!--<xpath expr="//field[@name='sale_order_id']" position="replace">
+                     <field name="sale_order_id" options="{&quot;no_open&quot;: True}" readonly="1" attrs="{'invisible': [('bool_tecnology','=',True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='product_id']" position="replace">
+                    <field name="product_id" attrs="{'invisible': [('use_credit_notes', '=', False), ('use_product_returns', '=', False), ('use_product_repairs', '=', False),('bool_tecnology','=',True)]}"/>
+                </xpath>-->
+            </field>
+        </record>
+        <record id="helpdesk_ticket_type_inherit" model="ir.ui.view">
+            <field name="name">helpdesk_ticket_type_inherit</field>
+            <field name="model">helpdesk.ticket.type</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_type_view_tree"/>
+            <field name="priority">19</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="team_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="helpdesk_ticket_inherit1" model="ir.ui.view">
+           <field name="name">helpdesk_ticket_inherit1</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="crm_suprapak.crm_inherit_helpdesk"/>
+            <field name="priority">19</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='opportunity_id']" position="after">
+                    <field name="quantity_report" attrs="{'invisible': [('bool_tecnology','=',True)]}"/>
+                    <field name="unit_product_id" options="{'no_create': True, 'no_create_edit':True}" attrs="{'invisible': [('bool_tecnology','=',True)]}"/>
+                </xpath>
+            </field> 
+        </record>
+        <record model="ir.actions.act_window" id="complaint_claim">
+            <field name="name">Complaint Claim</field>
+            <field name="res_model">complaint.claim</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record model="ir.actions.act_window" id="type_complaint">
+            <field name="name">Type Complaint</field>
+            <field name="res_model">type.complaint</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record model="ir.actions.act_window" id="subtype_complaint">
+            <field name="name">Subtype Complaint</field>
+            <field name="res_model">subtype.complaint</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="menu_service_complaint_claim"
+                  name="Complaint Claim"
+                  action="complaint_claim"
+                  parent="helpdesk.helpdesk_menu_config"
+                  sequence="11"/>
+        <menuitem id="menu_type_complaint"
+                  name="Type Complaint"
+                  action="type_complaint"
+                  parent="helpdesk.helpdesk_menu_config"
+                  sequence="12"/>
+         <menuitem id="menu_subtype_complaint"
+                  name="Subtype Complaint"
+                  action="subtype_complaint"
+                  parent="helpdesk.helpdesk_menu_config"
+                  sequence="13"/>
+    </data>
+</odoo>

@@ -2,11 +2,46 @@
 
 from odoo import models, fields, api
 from num2words import num2words
-
+from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
+import logging
+logger = logging.getLogger(__name__)
 
 class StockPicking(models.Model):
     _inherit  = 'stock.picking'
 
+    #check_weight_row = diference = fields.Float('hello baby')
+    total_boxes_d = fields.Integer('Hi', compute= '_compute_total_boxes_d')
+    weight_raw_total_d = fields.Float('Hi 2', compute='_compute_weight_raw_total_d')
+    weight_net_total_d = fields.Float('Hi 3', compute='_compute_weight_net_total_d')
+    check_raw_net_total = fields.Boolean('Hi 4', default=False)
+    
+   
+                        
+    @api.depends( 'move_ids_without_package.cant_cajas')                 
+    def _compute_total_boxes_d(self):
+        if self.move_ids_without_package:
+            for line in self:
+                line.total_boxes_d = sum(line.move_ids_without_package.mapped('cant_cajas'))
+                
+    @api.depends( 'move_ids_without_package.peso_bruto')                 
+    def _compute_weight_raw_total_d(self):
+        if self.move_ids_without_package:
+            for line in self:
+                line.weight_raw_total_d= sum(line.move_ids_without_package.mapped('peso_bruto'))
+    
+    @api.depends( 'move_ids_without_package.peso_neto')                 
+    def _compute_weight_net_total_d(self):
+        if self.move_ids_without_package:
+            for line in self:
+                line.weight_net_total_d= sum(line.move_ids_without_package.mapped('peso_neto'))
+                
+    #def invalid_button(self):
+        #def validation_invoice_due(self):
+            #self._compute_check_raw_net_total()
+    
+    
+    
     def _compute_barcode_report(self):
         barcode = ''
         order = self.env['sale.order'].search([('name','=',self.origin)])

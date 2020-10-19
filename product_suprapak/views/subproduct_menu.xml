@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="subproduct_menu_view_form" model="ir.ui.view">
+            <field name="name">product.template.subgroup.view.form</field>
+            <field name="model">product.template.subgroup</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="categ_id" string="Categoría Padre"/> 
+                            <field name="sequence_products_id" string="Secuencia Categoria"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="model_name_view_tree" model="ir.ui.view">
+            <field name="name">product.template.subgroup.view.tree</field>
+            <field name="model">product.template.subgroup</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="categ_id"/> 
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
